@@ -2,25 +2,29 @@ import { ReactElement } from "react";
 
 const Line = ({ guess, color, isFinal }: { guess: string; color: string; isFinal: boolean }) => {
   let tiles: ReactElement[] = [];
-
-  let colorChecker = color;
-
-  for (let i = 0; i < color.length; i++) {
-    let className = "tile";
-    if (isFinal) {
+  let classes: string[] = new Array(color.length).fill("tile");
+  let unused = color;
+  if (isFinal) {
+    for (let i = 0; i < color.length; i++) {
       if (color[i] == guess[i]) {
-        className += " correct";
-        colorChecker = colorChecker.replace(guess[i], "");
-      } else if (colorChecker.includes(guess[i])) {
-        colorChecker = colorChecker.replace(guess[i], "");
-        className += " close";
-      } else {
-        className += " wrong";
+        classes[i] += " correct";
+        unused = unused.slice(0, i) + " " + unused.slice(i + 1);
       }
     }
-    tiles.push(<div className={className}>{guess[i]}</div>);
-  }
 
+    for (let i = 0; i < color.length; i++) {
+      let char_index = unused.indexOf(guess[i]);
+      if (unused.includes(guess[i]) && unused[char_index] !== " " && classes[i] !== "tile correct") {
+        classes[i] += " close";
+        unused = unused.slice(0, char_index) + " " + unused.slice(char_index + 1);
+      } else if (!color.includes(guess[i]) || classes[i] !== "tile correct") {
+        classes[i] += " wrong";
+      }
+    }
+  }
+  classes.map((className, i) => {
+    tiles.push(<div className={className}>{guess[i]}</div>);
+  });
   return <div className="line">{...tiles}</div>;
 };
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import seedrandom from "seedrandom";
 import Line from "./Line";
+import Keyboard from "./Keyboard";
 
 function genColor(): string {
   const date = new Date();
@@ -23,7 +24,7 @@ const Game = () => {
   const [guesses, setGuesses] = useState(new Array<string>(7).fill(""));
   const [currentGuess, setCurrentGuess] = useState("");
   const [isOver, setIsOver] = useState(false);
-  const valids = "0123456789abcdef";
+  const valids = "0123456789ABCDEF";
   useEffect(() => {
     function handler(event: KeyboardEvent) {
       if (isOver) return;
@@ -54,11 +55,11 @@ const Game = () => {
       if (!valids.includes(key)) {
         return;
       }
-      console.log(currentGuess);
+
       if (currentGuess.length > 5) {
         return;
       }
-      setCurrentGuess(currentGuess + key);
+      setCurrentGuess(currentGuess + key.toLowerCase());
     }
 
     window.addEventListener("keydown", handler);
@@ -81,6 +82,7 @@ const Game = () => {
           })}
         </div>
       </div>
+      <Keyboard />
     </>
   );
 };
