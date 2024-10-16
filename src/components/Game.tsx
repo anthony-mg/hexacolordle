@@ -25,6 +25,7 @@ const Game = () => {
   const [currentGuess, setCurrentGuess] = useState("");
   const [isOver, setIsOver] = useState(false);
   const valids = "0123456789ABCDEF";
+  const BACKSPACE_UNICODE = "\u232B";
   useEffect(() => {
     function handler(event: KeyboardEvent) {
       if (isOver) return;
@@ -46,7 +47,7 @@ const Game = () => {
         return;
       }
 
-      if (key == "Backspace") {
+      if (key == "Backspace" || BACKSPACE_UNICODE) {
         if (currentGuess.length > 0) {
           setCurrentGuess(currentGuess.slice(0, -1));
         }
@@ -72,6 +73,7 @@ const Game = () => {
 
   return (
     <>
+      <h1>Hexacorlordle</h1>
       <div className="container">
         <div style={{ backgroundColor: `#${color}` }} className="color-container"></div>
         <div className="board">
