@@ -30,9 +30,9 @@ const Game = () => {
     function handler(event: KeyboardEvent) {
       if (isOver) return;
 
-      const key = event.key;
+      const key = event.key.toUpperCase();
 
-      if (key == "Enter") {
+      if (key == "ENTER") {
         if (currentGuess.length < 6) return;
 
         if (currentGuess === color) {
@@ -47,7 +47,7 @@ const Game = () => {
         return;
       }
 
-      if (key == "Backspace" || BACKSPACE_UNICODE) {
+      if (key == "BACKSPACE" || key == BACKSPACE_UNICODE) {
         if (currentGuess.length > 0) {
           setCurrentGuess(currentGuess.slice(0, -1));
         }
