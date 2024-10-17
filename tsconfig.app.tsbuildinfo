@@ -1,1 +1,1 @@
-{"root":["./src/App.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/Game.tsx","./src/components/Keyboard.tsx","./src/components/Line.tsx"],"version":"5.6.3"}
+{"root":["./src/App.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/game_screen/Game.tsx","./src/components/game_screen/Keyboard.tsx","./src/components/game_screen/Line.tsx","./src/components/how_to/HowTo.tsx","./src/components/main_screen/MainMenu.tsx"],"version":"5.6.3"}
